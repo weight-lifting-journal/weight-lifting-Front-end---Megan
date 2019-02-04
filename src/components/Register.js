@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Button, Form, FormGroup, Input } from 'reactstrap';
+import axios from 'axios';
+
+
 
 class Register extends Component {
     constructor(props) {
@@ -12,54 +13,52 @@ class Register extends Component {
         }
     };
 
-    handleInputChange = e => {
-        this.setState({ [e.target.name]: e.target.value });
-    }
+  addUser = e => {
+    e.preventDefault();
+    
+    axios
+      .post('https://weightliftingjournallambda.herokuapp.com/users/register', this.state)
+      .then(res => {
+        console.log(res.data);
+        localStorage.setItem('jwt', res.data.token);
+ 
+       
+      })
+      .catch(err => console.log(err));
+  }
 
-    handleLoginSubmit = e => {
-        const user = this.state.username;
-        localStorage.setItem('user', user);
-        window.location.reload();
-    }
+  handleInputChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
-    render() {
-        return (
-            <Form className='login-form'>
-                <div className='subHeader'></div>
-                <FormGroup>
-                    <Input 
-                        type='text'
-                        placeholder='User Name'
-                        name = 'username'
-                        value = {this.state.username}
-                        onChange={this.handleInputChange}
-                    />
-                </FormGroup>
-                <FormGroup>
-                    <Input 
-                        type='text'
-                        placeholder='Email'
-                        name = 'email'
-                        value = {this.state.email}
-                        onChange={this.handleInputChange}
-                    />
-                </FormGroup>
-                <FormGroup>
-                    <Input 
-                        type='password'
-                        placeholder='Password'
-                        name='password'
-                        value={this.state.password}
-                        onChange={this.handleInputChange}
-                    />
-                    <br />
-                    <Button color='dark' size='large' onClick={this.handleLoginSubmit}>
-                    Sign Up!
-                    </Button>
-                </FormGroup>
-            </Form>
-        );
-    }
+  render() {
+    return (
+      <div className="Register-form">
+        <h3>Sign Up!</h3>
+        <form onSubmit={this.addUser}>
+          <input
+            onChange={this.handleInputChange}
+            placeholder="username"
+            value={this.state.username}
+            name="username"
+          /> <br/>
+          <input
+            onChange={this.handleInputChange}
+            placeholder="email"
+            value={this.state.email}
+            name="email"
+          /> <br/>
+          <input
+            onChange={this.handleInputChange}
+            placeholder="password"
+            value={this.state.password}
+            name="password"
+          /> <br/>
+          <button type="submit">Sign Up!</button>
+        </form>
+      </div>
+    );
+  }
 }
 
 export default Register;
