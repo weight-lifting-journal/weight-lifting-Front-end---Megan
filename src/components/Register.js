@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Form, FormGroup, Input } from 'reactstrap';
 
-class Login extends Component {
+class Register extends Component {
     constructor(props) {
         super(props);
         this.state = {
             username: '',
+            email: '',
             password: ''
         }
     };
@@ -24,13 +25,22 @@ class Login extends Component {
     render() {
         return (
             <Form className='login-form'>
-                <div className='subHeader'>Login...</div>
+                <div className='subHeader'></div>
                 <FormGroup>
                     <Input 
                         type='text'
                         placeholder='User Name'
                         name = 'username'
                         value = {this.state.username}
+                        onChange={this.handleInputChange}
+                    />
+                </FormGroup>
+                <FormGroup>
+                    <Input 
+                        type='text'
+                        placeholder='Email'
+                        name = 'email'
+                        value = {this.state.email}
                         onChange={this.handleInputChange}
                     />
                 </FormGroup>
@@ -44,13 +54,12 @@ class Login extends Component {
                     />
                     <br />
                     <Button color='dark' size='large' onClick={this.handleLoginSubmit}>
-                    Log In
+                    Sign Up!
                     </Button>
-                    <Link to='/users/register'>Register</Link>
                 </FormGroup>
             </Form>
         );
     }
 }
 
-export default Login;
+export default Register;
