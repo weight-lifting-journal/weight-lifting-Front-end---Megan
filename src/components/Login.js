@@ -13,6 +13,8 @@ class Login extends Component {
         }
     };
 
+
+
   addUser = e => {
     e.preventDefault();
     
@@ -21,6 +23,9 @@ class Login extends Component {
       .then(res => {
         console.log(res.data);
         localStorage.setItem('jwt', res.data.token);
+
+  
+        
  
        
       })
@@ -30,6 +35,11 @@ class Login extends Component {
   handleInputChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.history.push('/workouts');
+  }
 
   render() {
     return (
@@ -48,7 +58,7 @@ class Login extends Component {
               value={this.state.password}
               name="password"
             /> <br/>
-            <button type="submit">Login!</button>
+            <button onClick={this.handleSubmit}>Login!</button>
             <Link link to='/users/register'>Register</Link>
           </form>
         </div>
