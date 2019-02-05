@@ -5,7 +5,7 @@ import './App.css';
 import Register from './components/Register';
 import Home from './components/Home';
 import Navigation from './components/Navigation';
-import Workouts from './components/Workouts/Workouts';
+import WorkoutListView from './Views/WorkoutListView';
 
 class App extends Component {
   render() {
@@ -15,7 +15,7 @@ class App extends Component {
         <Route exact path='/' component={Home}>Home</Route>
         <Route path='/users/login' component={Login}>Login</Route>
         <Route path='/users/register' component={Register}>Register</Route>
-        <Route path='/workouts' component={Workouts}>Workouts</Route>
+        <Route path='/workouts' component={WorkoutListView}>Workouts</Route>
       </div>
     );
   }
