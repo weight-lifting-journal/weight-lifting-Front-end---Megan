@@ -4,11 +4,13 @@ import Login from './components/Login';
 import './App.css';
 import Register from './components/Register';
 import Home from './components/Home';
+import Navigation from './components/Navigation';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
+        <Navigation />
         <Route exact path='/' component={Home}>Home</Route>
         <Route path='/users/login' component={Login}>Login</Route>
         <Route path='/users/register' component={Register}>Register</Route>
