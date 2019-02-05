@@ -19,6 +19,7 @@ class Navigation extends React.Component {
           <Modal show={this.state.show} handleClose={this.hideModal}>
             <Link link to='/'>Home</Link> <br/>
             <Link link to='/users/login'>Login</Link> <br/>
+            <Link link to='/workouts'>Workouts</Link> <br/>
           </Modal>
           <button type='button' onClick={this.showModal}>Menu</button>
         </main>
