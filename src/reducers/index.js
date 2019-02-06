@@ -1,7 +1,10 @@
 import {
     GET_WORKOUTS,
     GET_WORKOUTS_SUCCESS,
-    GET_WORKOUTS_FAILURE
+    GET_WORKOUTS_FAILURE,
+    ADD_WORKOUT_START,
+    ADD_WORKOUT_SUCCESS,
+    ADD_WORKOUT_FAILURE
 } from '../actions';
 
 const initialState = {
@@ -24,8 +27,7 @@ const reducer = (state = initialState, action) => {
             return{
                 ...state,
                 gettingWorkouts: false,
-                workouts: action.payload,
-                error: null
+                workouts: action.payload
             }
         case GET_WORKOUTS_FAILURE:
             return {
@@ -33,7 +35,24 @@ const reducer = (state = initialState, action) => {
                 gettingWorkouts: false,
                 error: action.payload
             }
-
+        case ADD_WORKOUT_START:
+            return {
+                ...state,
+                addingWorkouts:true
+            }
+        case ADD_WORKOUT_SUCCESS:
+            return {
+                ...state,
+                addingWorkouts:false,
+                workouts:action.payload,
+                error: null
+            }
+        case ADD_WORKOUT_FAILURE:
+            return {
+                ...state,
+                addingWorkouts: false,
+                error: action.payload
+            }
     default:
         return state;
     }

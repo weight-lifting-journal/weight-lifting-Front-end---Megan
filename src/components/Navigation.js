@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './Navigation.css';
 
 class Navigation extends React.Component {
@@ -17,9 +17,9 @@ class Navigation extends React.Component {
       return (
         <main>
           <Modal show={this.state.show} handleClose={this.hideModal}>
-            <Link link to='/'>Home</Link> <br/>
-            <Link link to='/users/login'>Login</Link> <br/>
-            <Link link to='/workouts'>Workouts</Link> <br/>
+            <NavLink exact to='/'>Home</NavLink> <br/>
+            <NavLink  to='/users/login'>Login</NavLink> <br/>
+            <NavLink  to='/workouts'>Workouts</NavLink> <br/>
           </Modal>
           <button type='button' onClick={this.showModal}>Menu</button>
         </main>

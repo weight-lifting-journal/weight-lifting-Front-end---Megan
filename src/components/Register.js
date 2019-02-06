@@ -16,6 +16,7 @@ class Register extends Component {
   addUser = e => {
     e.preventDefault();
     
+    
     axios
       .post('https://weightliftingjournallambda.herokuapp.com/users/register', this.state)
       .then(res => {

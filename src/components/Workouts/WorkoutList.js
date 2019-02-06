@@ -1,15 +1,16 @@
-import React from "react";
+import React, { Component } from "react";
 
-import Workout from './Workouts';
+import Workouts from './Workouts';
 
 const WorkoutList = props => {
-  return (
-    <ul>
-      {props.characters.map(character => {
-        return <Workout key={character.name} character={character} />;
-      })}
-    </ul>
-  );
-};
+    return(
+        <div className='workout-list'>
+            {props.workouts.map((w, i) => <Workouts smurf={w} key={i}/>)}
+            </div>
+    );
+}
+
+
 
 export default WorkoutList;
+

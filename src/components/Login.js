@@ -59,7 +59,7 @@ class Login extends Component {
               name="password"
             /> <br/>
             <button onClick={this.handleSubmit}>Login!</button>
-            <Link link to='/users/register'>Register</Link>
+            <Link to='/users/register'>Register</Link>
           </form>
         </div>
       );

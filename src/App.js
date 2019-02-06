@@ -5,9 +5,12 @@ import './App.css';
 import Register from './components/Register';
 import Home from './components/Home';
 import Navigation from './components/Navigation';
-import WorkoutListView from './Views/WorkoutListView';
+import WorkoutListPg from './components/Workouts/WorkoutListPg';
 
 class App extends Component {
+
+
+
   render() {
     return (
       <div className="App">
@@ -15,7 +18,7 @@ class App extends Component {
         <Route exact path='/' component={Home}>Home</Route>
         <Route path='/users/login' component={Login}>Login</Route>
         <Route path='/users/register' component={Register}>Register</Route>
-        <Route path='/workouts' component={WorkoutListView}>Workouts</Route>
+        <Route path='/workouts' component={WorkoutListPg}>Workouts</Route>
       </div>
     );
   }
