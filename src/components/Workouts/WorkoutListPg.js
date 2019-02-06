@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
-import { getWorkouts } from '../../actions';
+import { getWorkouts, addWorkout } from '../../actions';
 import WorkoutList from './WorkoutList';
 
 
@@ -16,14 +15,17 @@ class WorkoutListPg extends React.Component {
     // }
     componentDidMount() {
         this.props.getWorkouts();
+        this.props.addWorkout();
     }
 
     render() {
+        console.log(this.props);
         return (
             <WorkoutList
                 workouts={this.props.workouts}
                 exercises={this.props.exercises}
             />
+
         );
     }
 }
@@ -33,5 +35,5 @@ const mapStateToProps = state=> ({
     exercises: state.exercises
 })
     
-export default connect(mapStateToProps, {getWorkouts} )(WorkoutListPg);
+export default connect(mapStateToProps, { getWorkouts, addWorkout } )(WorkoutListPg);
 

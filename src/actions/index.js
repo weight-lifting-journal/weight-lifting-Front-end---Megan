@@ -6,7 +6,9 @@ export const GET_WORKOUTS_FAILURE = 'GET_WORKOUTS_FAILURE';
 export const ADD_WORKOUT_START = 'ADD_WORKOUT_START';
 export const ADD_WORKOUT_SUCCESS = 'ADD_WORKOUT_SUCCESS';
 export const ADD_WORKOUT_FAILURE = 'ADD_WORKOUT_FAILURE';
-
+export const DELETE_WORKOUT = 'DELETE_WORKOUT';
+export const DELETE_WORKOUT_SUCCESS = 'DELETE_WORKOUT_SUCCESS';
+export const DELETE_WORKOUT_FAILURE = 'DELETE_WORKOUT_FAILURE';
 
 const DUMMY_DATA = {
     journalsObj: [
@@ -63,13 +65,16 @@ const DUMMY_DATA = {
     ]
   };
 
+const URL = 'https://weightliftingjournallambda.herokuapp.com';
+
+
 export const getWorkouts = () => dispatch => {
 
     dispatch({
         type: GET_WORKOUTS
     });
     axios
-        .get('https://weightliftingjournallambda.herokuapp.com/workouts', {
+        .get(`${URL}/workouts`, {
             headers: {Authorization: localStorage.getItem('jwt')}
         })
         .then(res  => {
@@ -86,20 +91,41 @@ export const getWorkouts = () => dispatch => {
           });
 }
 
-export const addWorkout = workout => dispatch => {
-    dispatch({ 
-        type: ADD_WORKOUT_START 
-    });
-    axios
-      .post('https://weightliftingjournallambda.herokuapp.com/workouts', workout)
+
+
+
+export const addWorkout = workout => {
+  return dispatch => {
+    dispatch({ type: ADD_WORKOUT_START });
+
+    return axios
+      .post(`${URL}/workouts`, workout, {
+        headers: { Authorization: localStorage.getItem("jwt") }
+      })
       .then(res => {
-        dispatch({ 
-            type: ADD_WORKOUT_START, 
-            payload: res.data 
+        dispatch({
+          type: ADD_WORKOUT_SUCCESS,
+          payload: { ...workout, ...res.data }
         });
       })
-      .catch(err => dispatch({ 
-          type: ADD_WORKOUT_FAILURE, 
-          payload: err 
-        }));
+      .catch(error => dispatch({ type: ADD_WORKOUT_FAILURE, payload: error }));
   };
+};
+
+
+export const deleteWorkout = id => {
+  const deletedFriend = axios.delete(`${URL}/delete`, {
+    data: { id },
+    headers: { Authorization: localStorage.getItem('jwt')}
+  });
+  return dispatch => {
+    dispatch({ type: DELETE_WORKOUT });
+    deletedFriend
+      .then(({ data }) => {
+        dispatch({ type: DELETE_WORKOUT_SUCCESS, payload: data });
+      })
+      .catch(err => {
+        dispatch({ type: DELETE_WORKOUT_FAILURE, payload: err });
+      });
+  };
+};

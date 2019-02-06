@@ -1,17 +1,22 @@
-import React, { Component } from "react";
+import React from "react";
+import AddJournalForm from "./AddJournalForm";
 
-import Workouts from './Workouts';
 
-const WorkoutList = props => {
+
+
+function WorkoutList(props) {
     return (
         <div>
-            {props.workouts.map(workout => {
-                // return (
-                    <Workouts key={workout.id} date={workout.date} region={workout.region} />
-                // )
-            })}
+            <AddJournalForm />
+            {props.workouts.map(workout => (
+                <div key={workout.id}>
+                    <h2>{workout.date}</h2>
+                    <h3>{workout.region}</h3>
+                </div>
+                
+            ))}
         </div>
-    )
+    );
 }
 
 

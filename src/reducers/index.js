@@ -4,7 +4,10 @@ import {
     GET_WORKOUTS_FAILURE,
     ADD_WORKOUT_START,
     ADD_WORKOUT_SUCCESS,
-    ADD_WORKOUT_FAILURE
+    ADD_WORKOUT_FAILURE,
+    DELETE_WORKOUT,
+    DELETE_WORKOUT_SUCCESS,
+    DELETE_WORKOUT_FAILURE
 } from '../actions';
 
 const initialState = {
@@ -28,7 +31,7 @@ const reducer = (state = initialState, action) => {
             return{
                 ...state,
                 gettingWorkouts: false,
-                workouts: action.payload.journalObj,
+                workouts: action.payload.journalsObj,
                 exercises: action.payload.exerciseCards
             }
         case GET_WORKOUTS_FAILURE:
@@ -56,6 +59,25 @@ const reducer = (state = initialState, action) => {
                 addingWorkouts: false,
                 error: action.payload
             }
+        case DELETE_WORKOUT:
+            return {
+                ...state,
+                deletingWorkouts:true
+            }
+        case DELETE_WORKOUT_SUCCESS:
+            return {
+                ...state,
+                deletingWorkouts:false,
+                workouts:action.payload,
+                error: null
+            }
+        case DELETE_WORKOUT_FAILURE:
+            return {
+                ...state,
+                deletingWorkouts: false,
+                error: action.payload
+            }
+        
     default:
         return state;
     }
