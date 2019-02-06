@@ -1,34 +1,29 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 import { getWorkouts } from '../../actions';
 import WorkoutList from './WorkoutList';
 
-class WorkoutListPg extends Component {
 
+class WorkoutListPg extends React.Component {
     componentDidMount() {
-        this.props.getWorkouts()
-      }
+        this.props.getWorkouts();
+    }
 
-      render() {
+    render() {
         return (
-          <div className="App">
-            <WorkoutList workouts={this.props.workout} />
-          </div>
+            <WorkoutList
+                workouts={this.props.workouts}
+                exercises={this.props.exercises}
+            />
         );
-      }
     }
+}
+
+const mapStateToProps = state=> ({
+    workouts: state.workouts,
+    exercises: state.exercises
+})
     
-    const mapStateToProps = state => {
-      return {
-        ...state
-      }
-    }
-    
-    const mapDispatchToProps = dispatch => {
-      return {
-        getSmurfs: () => dispatch(getWorkouts()),
-      }
-    }
-    
-export default connect(mapStateToProps, mapDispatchToProps)(WorkoutListPg);
+export default connect(mapStateToProps, {getWorkouts} )(WorkoutListPg);
 

@@ -18,10 +18,15 @@ class Register extends Component {
     
     
     axios
-      .post('https://weightliftingjournallambda.herokuapp.com/users/register', this.state)
+      .post('https://weightliftingjournallambda.herokuapp.com/users/register', {
+        email: this.state.email,
+        username: this.state.username,
+        password: this.state.password
+      })
       .then(res => {
         console.log(res.data);
         localStorage.setItem('jwt', res.data.token);
+        this.props.history.push('/workouts');
  
        
       })

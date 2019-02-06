@@ -7,17 +7,75 @@ export const ADD_WORKOUT_START = 'ADD_WORKOUT_START';
 export const ADD_WORKOUT_SUCCESS = 'ADD_WORKOUT_SUCCESS';
 export const ADD_WORKOUT_FAILURE = 'ADD_WORKOUT_FAILURE';
 
+
+const DUMMY_DATA = {
+    journalsObj: [
+      {
+        id: 1,
+        date: "Feb 12, 2019",
+        region: "upper body"
+      },
+      {
+        id: 5,
+        date: "Feb 13, 2019",
+        region: "legs"
+      },
+      {
+        id: 9,
+        date: "Feb 14, 2019",
+        region: "legs"
+      },
+      {
+        id: 13,
+        date: "Feb 20",
+        region: "upper body"
+      }
+    ],
+    exerciseCards: [
+      {
+        journalId: 1,
+        name: "bench press",
+        reps: 12,
+        sets: 3,
+        weight: "190lbs"
+      },
+      {
+        journalId: 1,
+        name: "curls",
+        reps: 15,
+        sets: 3,
+        weight: "60lbs"
+      },
+      {
+        journalId: 5,
+        name: "leg press",
+        reps: 12,
+        sets: 3,
+        weight: "250lbs"
+      },
+      {
+        journalId: 2,
+        name: "squats",
+        reps: 25,
+        sets: 5,
+        weight: "150lbs"
+      }
+    ]
+  };
+
 export const getWorkouts = () => dispatch => {
 
     dispatch({
         type: GET_WORKOUTS
     });
     axios
-        .get('http://weightliftingjournallambda.herokuapp.com/workouts')
+        .get('http://weightliftingjournallambda.herokuapp.com/workouts', {
+            headers: {Authorization: localStorage.getItem('jwt')}
+        })
         .then( res  => {
             dispatch({
               type: GET_WORKOUTS_SUCCESS,
-              payload: res.data
+              payload: DUMMY_DATA
             });
           })
           .catch(err => {

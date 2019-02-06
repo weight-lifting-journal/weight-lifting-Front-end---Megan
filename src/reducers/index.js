@@ -9,6 +9,7 @@ import {
 
 const initialState = {
     workouts: [],
+    exercises: [],
     gettingWorkouts: false,
     addingWorkouts: false,
     updatingWorkouts: false,
@@ -27,7 +28,8 @@ const reducer = (state = initialState, action) => {
             return{
                 ...state,
                 gettingWorkouts: false,
-                workouts: action.payload
+                workouts: action.payload.journalObj,
+                exercises: action.payload.exerciseCards
             }
         case GET_WORKOUTS_FAILURE:
             return {
