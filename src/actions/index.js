@@ -69,13 +69,13 @@ export const getWorkouts = () => dispatch => {
         type: GET_WORKOUTS
     });
     axios
-        .get('http://weightliftingjournallambda.herokuapp.com/workouts', {
+        .get('https://weightliftingjournallambda.herokuapp.com/workouts', {
             headers: {Authorization: localStorage.getItem('jwt')}
         })
-        .then( res  => {
+        .then(res  => {
             dispatch({
               type: GET_WORKOUTS_SUCCESS,
-              payload: DUMMY_DATA
+              payload: res.data
             });
           })
           .catch(err => {
@@ -91,7 +91,7 @@ export const addWorkout = workout => dispatch => {
         type: ADD_WORKOUT_START 
     });
     axios
-      .post('http://weightliftingjournallambda.herokuapp.com/workouts', workout)
+      .post('https://weightliftingjournallambda.herokuapp.com/workouts', workout)
       .then(res => {
         dispatch({ 
             type: ADD_WORKOUT_START, 

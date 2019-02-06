@@ -6,6 +6,14 @@ import WorkoutList from './WorkoutList';
 
 
 class WorkoutListPg extends React.Component {
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         workouts: [],
+    //         exercises: []
+    //     }
+
+    // }
     componentDidMount() {
         this.props.getWorkouts();
     }

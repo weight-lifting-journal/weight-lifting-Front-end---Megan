@@ -14,19 +14,15 @@ class Register extends Component {
     };
 
   addUser = e => {
+
     e.preventDefault();
     
     
     axios
-      .post('https://weightliftingjournallambda.herokuapp.com/users/register', {
-        email: this.state.email,
-        username: this.state.username,
-        password: this.state.password
-      })
+      .post('https://weightliftingjournallambda.herokuapp.com/users/register', this.state)
       .then(res => {
         console.log(res.data);
         localStorage.setItem('jwt', res.data.token);
-        this.props.history.push('/workouts');
  
        
       })

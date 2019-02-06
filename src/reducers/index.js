@@ -32,6 +32,7 @@ const reducer = (state = initialState, action) => {
                 exercises: action.payload.exerciseCards
             }
         case GET_WORKOUTS_FAILURE:
+            console.log(action.payload, 'this is the action.payload');
             return {
                 ...state,
                 gettingWorkouts: false,

@@ -15,9 +15,19 @@ class Login extends Component {
 
 
 
-  addUser = e => {
-    e.preventDefault();
+  // addUser = e => {
+  //   console.log(addUser);
+  //   e.preventDefault();
     
+    
+
+  handleInputChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+
     axios
       .post('https://weightliftingjournallambda.herokuapp.com/users/login', this.state)
       .then(res => {
@@ -30,22 +40,14 @@ class Login extends Component {
        
       })
       .catch(err => console.log(err));
-  }
-
-  handleInputChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
-
-  handleSubmit = e => {
-    e.preventDefault();
-    this.props.history.push('/workouts');
-  }
+    }
+  
 
   render() {
     return (
         <div className="Login-form">
           <h3>Login!</h3>
-          <form onSubmit={this.addUser}>
+          <form onSubmit={this.handleSubmit}>
             <input
               onChange={this.handleInputChange}
               placeholder="email"

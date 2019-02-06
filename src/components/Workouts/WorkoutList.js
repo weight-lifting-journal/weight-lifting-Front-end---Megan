@@ -6,15 +6,9 @@ const WorkoutList = props => {
     return (
         <div>
             {props.workouts.map(workout => {
-                return <Workouts
-                            key={workout.id}
-                            workout={workout}
-                            amOfExercises={
-                                props.exercises.filter(exercise => {
-                                    return exercise.journalId === workout.id;
-                                }).length
-                            }
-                        />
+                // return (
+                    <Workouts key={workout.id} date={workout.date} region={workout.region} />
+                // )
             })}
         </div>
     )

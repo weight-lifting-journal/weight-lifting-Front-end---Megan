@@ -1,25 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 const Workouts = props => {
-  const { id, region, date } = props.workout;
-  const { amOfExercises } = props;
+  return(
+      <div className='workout' id={props.workout.id}>
+          <h1>{props.workout.date}</h1>
+          <p>{props.workout.region}</p>
+      </div>
+  )
+}
 
-  return (
-    <div
-      component={props => {
-        return (
-          <Link to={`/workout/${id}`} {...props}>
-            <div
-              primary={`${region} (${amOfExercises})`}
-              secondary={date}
-            />
-          </Link>
-        );
-      }}
-    />
-  );
-};
+
 
  
 
