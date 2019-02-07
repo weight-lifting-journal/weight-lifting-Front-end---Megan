@@ -5,16 +5,16 @@ import AddJournalForm from "./AddJournalForm";
 
 
 function WorkoutList(props) {
-    function routeToJournal(e, journal) {
-        e.preventDefault();
-        props.history.push(`/workouts/${journal.id}`);
-        props.getJournalById(journal.id)
-      }
+    // function routeToJournal(e, journal) {
+    //     e.preventDefault();
+    //     props.history.push(`/workouts/${journal.id}`);
+    //     props.getJournalById(journal.id)
+    //   }
 
     return (
         <div>
             {props.workouts.map(workout => (
-                <div onClick={e => routeToJournal(e, journal)}
+                <div 
                     key={workout.id}>
                     <h2>{workout.date}</h2>
                     <h3>{workout.region}</h3>

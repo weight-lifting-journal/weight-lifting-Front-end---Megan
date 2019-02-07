@@ -3,6 +3,9 @@ import axios from 'axios';
 export const GET_WORKOUTS = 'GET_WORKOUTS';
 export const GET_WORKOUTS_SUCCESS = 'GET_WORKOUTS_SUCCESS';
 export const GET_WORKOUTS_FAILURE = 'GET_WORKOUTS_FAILURE';
+export const GET_WORKOUT = 'GET_WORKOUT';
+export const GET_WORKOUT_SUCCESS = 'GET_WORKOUT_SUCCESS';
+export const GET_WORKOUT_FAILURE = 'GET_WORKOUT_FAILURE';
 export const ADD_WORKOUT_START = 'ADD_WORKOUT_START';
 export const ADD_WORKOUT_SUCCESS = 'ADD_WORKOUT_SUCCESS';
 export const ADD_WORKOUT_FAILURE = 'ADD_WORKOUT_FAILURE';
@@ -80,7 +83,7 @@ export const getWorkouts = () => dispatch => {
         .then(res  => {
             dispatch({
               type: GET_WORKOUTS_SUCCESS,
-              payload: res.data
+              payload: DUMMY_DATA
             });
           })
           .catch(err => {
@@ -89,6 +92,29 @@ export const getWorkouts = () => dispatch => {
               payload: err
             });
           });
+}
+
+export const getWorkout = () => dispatch => {
+
+  dispatch({
+      type: GET_WORKOUT
+  });
+  axios
+      .get(`${URL}/workouts/${id}`, {
+          headers: {Authorization: localStorage.getItem('jwt')}
+      })
+      .then(res  => {
+          dispatch({
+            type: GET_WORKOUT_SUCCESS,
+            payload: DUMMY_DATA
+          });
+        })
+        .catch(err => {
+          dispatch({
+            type: GET_WORKOUT_FAILURE,
+            payload: err
+          });
+        });
 }
 
 
@@ -116,34 +142,14 @@ export const addWorkout = workout => dispatch => {
 }
 
 
-
-// export const addWorkout = workout => {
-//   return dispatch => {
-//     dispatch({ type: ADD_WORKOUT_START });
-
-//     return axios
-//       .post(`${URL}/workouts`, workout, {
-//         headers: { Authorization: localStorage.getItem("jwt") }
-//       })
-//       .then(res => {
-//         dispatch({
-//           type: ADD_WORKOUT_SUCCESS,
-//           payload: { ...workout, ...res.data }
-//         });
-//       })
-//       .catch(error => dispatch({ type: ADD_WORKOUT_FAILURE, payload: error }));
-//   };
-// };
-
-
 export const deleteWorkout = id => {
-  const deletedFriend = axios.delete(`${URL}/delete`, {
+  const deleteWorkout = axios.delete(`${URL}/delete/${id}`, {
     data: { id },
     headers: { Authorization: localStorage.getItem('jwt')}
   });
   return dispatch => {
     dispatch({ type: DELETE_WORKOUT });
-    deletedFriend
+    deleteWorkout
       .then(({ data }) => {
         dispatch({ type: DELETE_WORKOUT_SUCCESS, payload: data });
       })
