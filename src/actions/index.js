@@ -92,25 +92,48 @@ export const getWorkouts = () => dispatch => {
 }
 
 
+export const addWorkout = workout => dispatch => {
+
+    dispatch({
+        type: ADD_WORKOUT_START
+    });
+    axios
+        .post(`${URL}/workouts`, workout, {
+            headers: {Authorization: localStorage.getItem('jwt')}
+        })
+        .then(res  => {
+            dispatch({
+              type: ADD_WORKOUT_SUCCESS,
+              payload: {...workout, ...res.data}
+            });
+          })
+          .catch(err => {
+            dispatch({
+              type: ADD_WORKOUT_FAILURE,
+              payload: err
+            });
+          });
+}
 
 
-export const addWorkout = workout => {
-  return dispatch => {
-    dispatch({ type: ADD_WORKOUT_START });
 
-    return axios
-      .post(`${URL}/workouts`, workout, {
-        headers: { Authorization: localStorage.getItem("jwt") }
-      })
-      .then(res => {
-        dispatch({
-          type: ADD_WORKOUT_SUCCESS,
-          payload: { ...workout, ...res.data }
-        });
-      })
-      .catch(error => dispatch({ type: ADD_WORKOUT_FAILURE, payload: error }));
-  };
-};
+// export const addWorkout = workout => {
+//   return dispatch => {
+//     dispatch({ type: ADD_WORKOUT_START });
+
+//     return axios
+//       .post(`${URL}/workouts`, workout, {
+//         headers: { Authorization: localStorage.getItem("jwt") }
+//       })
+//       .then(res => {
+//         dispatch({
+//           type: ADD_WORKOUT_SUCCESS,
+//           payload: { ...workout, ...res.data }
+//         });
+//       })
+//       .catch(error => dispatch({ type: ADD_WORKOUT_FAILURE, payload: error }));
+//   };
+// };
 
 
 export const deleteWorkout = id => {

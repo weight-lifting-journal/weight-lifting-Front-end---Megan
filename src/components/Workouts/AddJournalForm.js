@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addWorkout } from '../../actions';
 
-class FriendForm extends Component {
+class AddJournalForm extends Component {
     state = {
         date: '',
         region: ''
@@ -12,7 +12,6 @@ class FriendForm extends Component {
     };
   
     handleAddJournal = _ => {
-        console.log(addWorkout());
       const { date, region } = this.state;
       this.props.addWorkout({ date, region });
       this.setState({ date: '', region: ''});
@@ -52,4 +51,4 @@ class FriendForm extends Component {
     };
   };
   
-  export default connect(mapStateToProps, { addWorkout })(FriendForm);
+  export default connect(mapStateToProps, { addWorkout })(AddJournalForm);
